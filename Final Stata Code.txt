@@ -1,0 +1,22 @@
+oprobit Happy married noreligion Attend Riten unemp Jobsat SocialTrust year age age2 female white Relincome HSDip CDip Health childs, robust
+outreg2 using oProbit2.doc, tstat ti(Table 1: Ordered Probit Model) replace
+mfx compute, predict(outcome(1)) post
+outreg2 using oProbit2.doc, tstat append
+mfx compute, predict(outcome(2)) post
+outreg2 using oProbit2.doc, tstat append
+mfx compute, predict(outcome(3)) post
+outreg2 using oProbit2.doc, tstat append
+estat sum
+probit HapBi married noreligion Attend Riten unemp Jobsat SocialTrust year age age2 female white Relincome HSDip CDip Health childs, robust
+outreg2 using Probit.doc, tstat ti(Table 3: Probit Model) replace
+margins, dydx (married Attend noreligion Riten SocialTrust unemp Jobsat age age2 female Relincome year HSDip CDip white Health childs) post
+outreg2 using Probit.doc, tstat ti(Table 3: Probit Model) append
+reg HapBi married attend noreligion Riten SocialTrust unemp Jobsat age age2 female Relincome year HSDip CDip white Health childs, robust
+outreg2 using LPM.doc, tstat ti(Table 4: Linear Probability Model) replace
+logit HapBi MurrayFamily MurrayVocation MurrayFaith SocialTrust income age MurrayMV
+outreg2 using Murray.doc, tstat ti(Table 1: Murray's Specification) replace
+margins, dydx (MurrayFamily MurrayVocation MurrayFaith SocialTrust income age MurrayMV)
+outreg2 using Murray.doc, tstat append
+probit HapBi married noreligion Attend Riten unemp Jobsat SocialTrust year age age2 female white Relincome HSDip CDip Health childs, robust
+estat sum
+outreg2 using Sum2.doc, ti(Table 5: Summary Statistics for Regression) sum replace
